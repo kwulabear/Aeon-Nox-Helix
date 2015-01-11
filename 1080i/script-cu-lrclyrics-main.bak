@@ -1,0 +1,1499 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <defaultcontrol always="false">8851</defaultcontrol>
+    <allowoverlay>true</allowoverlay>
+    <onload condition="Skin.HasSetting(musicvisinfomode)">Skin.SetBool(infovistoggled)</onload>
+    <onload condition="Skin.HasSetting(musicvisinfomode)">Skin.ToggleSetting(musicvisinfomode)</onload> 
+    <onload condition="!Skin.HasSetting(DisablePanelWidgetVis)">Skin.SetBool(infovistoggled2)</onload>
+    <onload condition="!Skin.HasSetting(DisablePanelWidgetVis)">Skin.ToggleSetting(DisablePanelWidgetVis)</onload>
+    <onload condition="!Skin.HasSetting(bgtheme1) + !Skin.HasSetting(bgtheme2) + !Skin.HasSetting(bgtheme3)">Skin.SetBool(bgtheme1)</onload>
+    <onload condition="!Skin.HasSetting(LyricScroll1) + !Skin.HasSetting(LyricScroll2) + !Skin.HasSetting(LyricScroll3)">Skin.SetBool(LyricScroll1)</onload>
+    <onunload condition="Skin.HasSetting(infovistoggled)">Skin.ToggleSetting(musicvisinfomode)</onunload>
+    <onunload condition="Skin.HasSetting(infovistoggled2)">Skin.ToggleSetting(DisablePanelWidgetVis)</onunload>
+    <onunload>Skin.Reset(LyricScroll)</onunload>
+    <onunload>Skin.Reset(infovistoggled)</onunload>
+    <onunload>Skin.Reset(infovistoggled2)</onunload>
+   <animation type="WindowOpen" reversible="false">
+        <effect type="zoom" start="80" end="100" center="640,360" easing="out" tween="back" time="300"/>
+        <effect type="fade" start="0" end="100" time="300"/>
+    </animation>
+    <animation type="WindowClose" reversible="false">
+        <effect type="zoom" start="100" end="80" center="640,360" easing="in" tween="back" time="300"/>
+        <effect type="fade" start="100" end="0" time="300"/>
+    </animation>
+    <controls>
+       <control type="image">
+            <description>overlay image red</description>
+            <left/>
+            <top/>
+            <width>1920</width>
+            <height>1080</height>
+            <visible>Skin.HasSetting(bgtheme1) + [!Skin.HasSetting(bgtheme2) + !Skin.HasSetting(bgtheme3)]</visible>
+            <texture border="20,20,20,20">script.culrc.lyrics/default-panel1.png</texture>
+        </control>
+        <control type="image">
+            <description>overlay image blue</description>
+            <left/>
+            <top/>
+            <width>1920</width>
+            <height>1080</height>
+            <visible>Skin.HasSetting(bgtheme2)</visible>
+            <texture border="20,20,20,20">script.culrc.lyrics/default-panel2.png</texture>
+        </control>
+        <control type="image">
+            <description>overlay image3 Green</description>
+            <left/>
+            <top/>
+            <width>1920</width>
+            <height>1080</height>
+            <visible>Skin.HasSetting(bgtheme3)</visible>
+            <texture border="20,20,20,20">script.culrc.lyrics/default-panel3.png</texture>
+        </control>
+        <control type="fadelabel" id="1">
+            <description>Artist, Album, Song Title</description>
+            <left>1050</left>
+            <top>150</top>
+            <width>500</width>
+            <height>75</height>
+            <visible>true</visible>
+            <scroll>false</scroll>
+            <scrollout>true</scrollout>
+            <pauseatend>200</pauseatend>
+            <scrollspeed>50</scrollspeed>
+            <resetonlabelchange>false</resetonlabelchange>
+            <label></label>
+            <info>MusicPlayer.Artist</info>
+             <info>MusicPlayer.Album</info>
+            <font>88FFFFFF</font>
+            <textcolor>$VAR[TitleColorVar]</textcolor>
+            <textoffsetx>10</textoffsetx>
+        </control>
+        <control type="image">
+            <description>lyrics bg inversed</description>
+            <left>930</left>
+            <top>440</top>
+            <width>820</width>
+            <height>280</height>
+            <animation type="Visible" reversible="true">
+                <effect type="slide" start="1990" end="0" delay="520" tween="cubic" time="560"/>
+            </animation>
+            <animation type="Hidden" reversible="true">
+                <effect type="slide" start="0" end="1990" delay="520" time="1560"/>
+            </animation>
+            <visible>!Skin.HasSetting(FadeVizBG)</visible>
+            <texture border="20,20,20,20">script.culrc.lyrics/settingsbg1.png</texture>
+        </control>
+        <control type="label">
+            <description>Next Tracks</description>
+            <left>165</left>
+            <top>390</top>
+            <width>662</width>
+            <height>20</height>
+            <visible>MusicPlayer.HasNext</visible>
+            <label>[B]Next Tracks:[/B]</label>
+            <font>88FFFFFF</font>
+            <align>left</align>
+            <textcolor>$VAR[TitleColorVar]</textcolor>
+        </control>
+        <control type="label">
+            <description>Song Title</description>
+            <left>1250</left>
+            <top>370</top>
+            <width>400</width>
+            <height>20</height>
+            <visible>true</visible>
+            <label>$INFO[MusicPlayer.Title]</label>
+            <font>88FFFFFF</font>
+            <align>left</align>
+            <textcolor>$VAR[TitleColorVar]</textcolor>
+        </control>
+        <control type="image">
+            <description>separator</description>
+            <left>200</left>
+            <top>420</top>
+            <width>250</width>
+            <height>1</height>
+            <visible>MusicPlayer.HasNext</visible>
+            <texture>script.culrc.lyrics/default-separatorOSD.png</texture>
+            <colordiffuse>DDFFFFFF</colordiffuse>
+        </control>
+		<!--
+        <control type="image" id="8308">
+            <left>1350</left>
+            <top>725</top>
+            <width>350</width>
+            <height>350</height>
+            <texture background="true" fallback="empty.png">$INFO[Skin.String(ArtistsLogosPath)]$INFO[MusicPlayer.Artist,,/logo.png]</texture>
+            <aspectratio>keep</aspectratio>
+            <fadetime>400</fadetime>
+            <animation effect="fade" start="100" end="0" time="0" condition="Substring(Control.GetLabel(8308),empty.png)">Conditional</animation>
+            <visible>!IsEmpty(Skin.String(ArtistsLogosPath))</visible>
+            <animation effect="slide" time="320" tween="cubic" easing="inout" end="-155" condition="!Skin.HasSetting(CDArtinVis)">Conditional</animation>
+        </control>
+		-->
+        <control type="label">
+            <description>Current Time</description>
+            <left>300</left>
+            <top>1055</top>
+            <width>150</width>
+            <height>20</height>
+            <label>$INFO[System.Time]</label>
+            <font>Font_Reg17</font>
+            <align>left</align>
+            <textcolor>$VAR[TitleColorVar]</textcolor>
+            <shadowcolor>AA000000</shadowcolor>
+        </control>
+        <control type="label">
+            <description>Remaining Time</description>
+            <left>1860</left>
+            <top>1038</top>
+            <width>150</width>
+            <height>20</height>
+            <label>$INFO[MusicPlayer.TimeRemaining]</label>
+            <font>Font_Reg17</font>
+            <align>left</align>
+            <textcolor>$VAR[TitleColorVar]</textcolor>
+            <shadowcolor>AA000000</shadowcolor>
+        </control>
+        <control type="label">
+            <description>Lyrics label</description>
+            <left>20</left>
+            <top>1055</top>
+            <width>150</width>
+            <height>20</height>
+            <label>*$ADDON[script.cu.lrclyrics 32199]* - </label>
+            <font>Font_Reg17</font>
+            <align>left</align>
+            <textcolor>88FFFFFF</textcolor>
+            <shadowcolor>AA000000</shadowcolor>
+        </control>
+        <control type="label" id="200">
+            <description>Scraper Label</description>
+            <left>70</left>
+            <top>1055</top>
+            <width>150</width>
+            <height>20</height>
+            <left>600</left>
+            <label>-</label>
+            <font>Font_Reg17</font>
+            <align>right</align>
+            <textcolor>88FFFFFF</textcolor>
+            <disabledcolor>60FFFFFF</disabledcolor>
+        </control>
+        <control type="image">
+            <description>separator</description>
+            <left>1060</left>
+            <top>207</top>
+            <width>325</width>
+            <height>1</height>
+            <texture>script.culrc.lyrics/default-separatorOSD.png</texture>
+            <colordiffuse>DDFFFFFF</colordiffuse>
+        </control>
+        <control type="image">
+            <description>separator</description>
+            <left>980</left>
+            <top>765</top>
+            <width>350</width>
+            <height>1</height>
+            <texture>script.culrc.lyrics/default-separatorOSD.png</texture>
+            <colordiffuse>DDFFFFFF</colordiffuse>
+        </control>
+        <!--<control type="image">
+            <description>list</description>
+            <left>816</left>
+            <top>60</top>
+            <width>32</width>
+            <height>32</height>
+            <texture>script.culrc.lyrics/default-lyricslist.png</texture>
+            <visible>!IsEmpty(Window(Home).Property(culrc.haslist))</visible>
+        </control>-->
+        <control type="group">
+            <left>400</left>
+            <top>175</top>
+            <control type="image">
+                <description>Song Rating Image</description>
+                <left>762</left>
+                <top>60</top>
+                <height>40</height>
+                <width>120</width>
+                <texture>$INFO[Player.StarRating]</texture>
+                <aspectratio>keep</aspectratio>
+            </control>
+            <control type="label">
+                <description>Time Label</description>
+                <left>170</left>
+                <top>135</top>
+                <width>200</width>
+                <height>20</height>
+                <label>$INFO[MusicPlayer.Time]</label>
+                <font>font13</font>
+                <align>left</align>
+                <aligny>center</aligny>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="label">
+                <description>Duration Label</description>
+                <left>682</left>
+                <top>135</top>
+                <width>200</width>
+                <height>20</height>
+                <label>$INFO[MusicPlayer.Duration]</label>
+                <font>font13</font>
+                <align>right</align>
+                <aligny>center</aligny>
+                <textcolor>FFFFFFFF</textcolor>
+            </control>
+            <control type="label">
+                <description>Playlist Pos No</description>
+                <left>682</left>
+                <top>100</top>
+                <width>200</width>
+                <height>20</height>
+                <label>$INFO[MusicPlayer.Playlistposition]$INFO[MusicPlayer.Playlistlength,/]</label>
+                <font>font13</font>
+                <align>right</align>
+                <textcolor>FFFFFFFF</textcolor>
+                <visible>!MusicPartyMode.Enabled</visible>
+            </control>
+            <control type="label">
+                <description>PartyMode Enabled</description>
+                <left>832</left>
+                <top>114</top>
+                <width>200</width>
+                <height>20</height>
+                <label>589</label>
+                <font>font13</font>
+                <align>right</align>
+                <textcolor>FFFFFFFF</textcolor>
+                <visible>MusicPartyMode.Enabled</visible>
+            </control>
+            <control type="progress">
+                <description>Progressbar</description>
+                <left>260</left>
+                <top>133</top>
+                <width>516</width>
+                <height>2</height>
+                <info>Player.Progress</info>
+                <texturebg border="6,0,6,0">script.culrc.lyrics/default-progress_back.png</texturebg>
+                <lefttexture>-</lefttexture>
+                <midtexture border="6,0,6,0">script.culrc.lyrics/default-progress_mid.png</midtexture>
+                <righttexture>-</righttexture>
+                <overlaytexture>-</overlaytexture>
+                <overlaytexture>-</overlaytexture>
+            </control>
+            <control type="slider">
+                <description>Slider</description>
+                <left>254</left>
+                <top>139</top>
+                <width>516</width>
+                <height>12</height>
+                <action>seek</action>
+            </control>
+            <control type="image">
+                <description>separator</description>
+                <left>450</left>
+                <top>225</top>
+                <width>700</width>
+                <height>1</height>
+                <texture>script.culrc.lyrics/default-separatorOSD.png</texture>
+            </control>
+            <control type="group" id="999">
+                <left>304</left>
+                <top>150</top>
+                <control type="button" id="600">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>210</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDPrevTrackFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDPrevTrackNF.png</texturenofocus>
+                    <onleft>607</onleft>
+                    <onright>601</onright>
+                    <onright>333</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Previous)</onclick>
+                </control>
+                <control type="button" id="601">
+                    <left>55</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>31354</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDRewindFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDRewindNF.png</texturenofocus>
+                    <onleft>600</onleft>
+                    <onright>602</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Rewind)</onclick>
+                </control>
+                <control type="togglebutton" id="602">
+                    <left>110</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>31351</label>
+                    <altlabel>208</altlabel>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDPauseFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDPauseNF.png</texturenofocus>
+                    <usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/OSDPlayFO.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/OSDPlayNF.png</alttexturenofocus>
+                    <onleft>601</onleft>
+                    <onright>603</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Play)</onclick>
+                </control>
+                <control type="button" id="603">
+                    <left>165</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>31352</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDStopFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDStopNF.png</texturenofocus>
+                    <onleft>602</onleft>
+                    <onright>604</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Stop)</onclick>
+                </control>
+                <control type="button" id="604">
+                    <left>220</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>31353</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDForwardFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDForwardNF.png</texturenofocus>
+                    <onleft>603</onleft>
+                    <onright>605</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Forward)</onclick>
+                </control>
+                <control type="button" id="605">
+                    <left>275</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>209</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDNextTrackFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDNextTrackNF.png</texturenofocus>
+                    <onleft>604</onleft>
+                    <onright>606</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onclick>PlayerControl(Next)</onclick>
+                </control>
+                <control type="button" id="606">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>$LOCALIZE[486]$INFO[Playlist.Repeat, : ]</label>
+                    <font>-</font>
+                    <texturefocus>-</texturefocus>
+                    <texturenofocus>-</texturenofocus>
+                    <onclick>XBMC.PlayerControl(Repeat)</onclick>
+                    <onleft>605</onleft>
+                    <onright>607</onright>
+                    <onup>4000</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatNF.png</texture>
+                    <visible>!Playlist.IsRepeat + !Playlist.IsRepeatOne</visible>
+                    <visible>!Control.HasFocus(606)</visible>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatFO.png</texture>
+                    <visible>!Playlist.IsRepeat + !Playlist.IsRepeatOne</visible>
+                    <visible>Control.HasFocus(606)</visible>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatOneNF.png</texture>
+                    <visible>Playlist.IsRepeatOne</visible>
+                    <visible>!Control.HasFocus(606)</visible>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatOneFO.png</texture>
+                    <visible>Playlist.IsRepeatOne</visible>
+                    <visible>Control.HasFocus(606)</visible>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatAllNF.png</texture>
+                    <visible>Playlist.IsRepeat</visible>
+                    <visible>!Control.HasFocus(606)</visible>
+                </control>
+                <control type="image">
+                    <left>330</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <texture>script.culrc.lyrics/OSDRepeatAllFO.png</texture>
+                    <visible>Playlist.IsRepeat</visible>
+                    <visible>Control.HasFocus(606)</visible>
+                </control>
+                <control type="togglebutton" id="607">
+                    <left>385</left>
+                    <top>0</top>
+                    <width>50</width>
+                    <height>50</height>
+                    <label>$LOCALIZE[590]$INFO[Playlist.Random, : ]</label>
+                    <font>-</font>
+                    <texturefocus>script.culrc.lyrics/OSDRandomOffFO.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/OSDRandomOffNF.png</texturenofocus>
+                    <usealttexture>Playlist.IsRandom</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/OSDRandomOnFO.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/OSDRandomOnNF.png</alttexturenofocus>
+                    <onclick>XBMC.PlayerControl(Random)</onclick>
+                    <onleft>606</onleft>
+                    <onright>600</onright>
+                    <onup>111</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                </control>
+            </control>
+        </control>
+        <!-- ** Required ** Do not change <id> or <type> -->
+        <control type="list" id="110">
+            <left>934</left>
+            <top>450</top>
+            <width>812</width>
+            <height>257</height>
+            <onleft>8010</onleft>
+            <onright>111</onright>
+            <onup>999</onup>
+            <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+            <ondown condition="Control.IsVisible(110)">110</ondown>
+            <viewtype label="535">list</viewtype>
+            <pagecontrol>111</pagecontrol>
+            <visible>!Skin.HasSetting(LyricScroll)</visible>
+            <itemlayout height="29">
+                <control type="label">
+                    <left>10</left>
+                    <top>3</top>
+                    <width>796</width>
+                    <height>22</height>
+                    <info>ListItem.Label</info>
+                    <font>Font_Reg26_Caps</font>
+                    <textcolor>white3</textcolor>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                </control>
+            </itemlayout>
+            <focusedlayout height="29">
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>612</width>
+                    <height>29</height>
+                    <texture>script.culrc.lyrics/default-list-focus.png</texture>
+                    <visible>Control.HasFocus(110)</visible>
+                </control>
+                <control type="label">
+                    <left>10</left>
+                    <top>3</top>
+                    <width>796</width>
+                    <height>22</height>
+                    <info>ListItem.Label</info>
+                    <font>Font_Reg26_Caps</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFEB9E17</textcolor>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="spincontrol" id="111">
+            <description>Next page button</description>
+            <left>1450</left>
+            <top>750</top>
+            <width>25</width>
+            <height>22</height>
+            <font>font13</font>
+            <align>right</align>
+            <subtype>page</subtype>
+            <onleft>8887</onleft>
+            <onright>8887</onright>
+            <ondown>999</ondown>
+            <onup condition="Control.IsVisible(8851)">8851</onup>
+            <onup condition="Control.IsVisible(110)">110</onup>
+            <textcolor>FFFFFFFF</textcolor>
+            <textureup>script.culrc.lyrics/default-scroll-up.png</textureup>
+            <texturedown>script.culrc.lyrics/default-scroll-down.png</texturedown>
+            <textureupfocus>script.culrc.lyrics/default-scroll-up-focus.png</textureupfocus>
+            <texturedownfocus>script.culrc.lyrics/default-scroll-down-focus.png</texturedownfocus>
+            <showonepage>false</showonepage>
+            <visible>true</visible>
+        </control>
+        <!-- ** Required ** Do not change <id> or <type> -->
+        <control type="list" id="120">
+            <left>534</left>
+            <top>270</top>
+            <width>812</width>
+            <height>305</height>
+            <onleft>121</onleft>
+            <onright>121</onright>
+            <onup>120</onup>
+            <ondown>120</ondown>
+            <viewtype label="535">list</viewtype>
+            <pagecontrol>121</pagecontrol>
+            <scrolltime>200</scrolltime>
+            <itemlayout height="29">
+                <control type="label">
+                    <left>10</left>
+                    <top>3</top>
+                    <width>796</width>
+                    <height>22</height>
+                    <info>ListItem.Label</info>
+                    <font>font13</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                </control>
+            </itemlayout>
+            <focusedlayout height="29">
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>812</width>
+                    <height>29</height>
+                    <texture>script.culrc.lyrics/default-list-focus.png</texture>
+                    <visible>Control.HasFocus(120)</visible>
+                </control>
+                <control type="label">
+                    <left>10</left>
+                    <top>3</top>
+                    <width>796</width>
+                    <height>22</height>
+                    <info>ListItem.Label</info>
+                    <font>font13</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFEB9E17</textcolor>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="spincontrol" id="121">
+            <description>Next page button</description>
+            <left>996</left>
+            <top>565</top>
+            <width>25</width>
+            <height>22</height>
+            <font>font13</font>
+            <align>right</align>
+            <subtype>page</subtype>
+            <textcolor>FFFFFFFF</textcolor>
+            <onleft>120</onleft>
+            <onright>120</onright>
+            <ondown>120</ondown>
+            <onup>120</onup>
+            <textureup>script.culrc.lyrics/default-scroll-up.png</textureup>
+            <texturedown>script.culrc.lyrics/default-scroll-down.png</texturedown>
+            <textureupfocus>script.culrc.lyrics/default-scroll-up-focus.png</textureupfocus>
+            <texturedownfocus>script.culrc.lyrics/default-scroll-down-focus.png</texturedownfocus>
+            <showonepage>false</showonepage>
+            <visible>Control.IsVisible(120)</visible>
+        </control>
+        <control type="list" id="8010">
+            <left>150</left>
+            <top>425</top>
+            <width>650</width>
+            <height>153</height>
+            <onup>999</onup>
+            <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+            <ondown condition="Control.IsVisible(110)">110</ondown>
+            <onleft>110</onleft>
+            <onright>110</onright>
+            <orientation>vertical</orientation>
+            <focusposition>0</focusposition>
+            <autoscroll>false</autoscroll>
+            <preloaditems>2</preloaditems>
+            <itemlayout height="30" width="350">
+                <control type="image">
+                    <left>15</left>
+                    <top>0</top>
+                    <width>770</width>
+                    <height>30</height>
+                    <texture border="3">osd_settings_buttonnf.png</texture>
+                </control>
+                <control type="label">
+                    <left>35</left>
+                    <top>0</top>
+                    <width>60</width>
+                    <height>30</height>
+                    <align>right</align>
+                    <label>$INFO[ListItem.Property(Number)]</label>
+                    <font>Font_Reg29</font>
+                    <textcolor>$VAR[TitleColorVar]</textcolor>
+                </control>
+                <control type="label">
+                    <left>45</left>
+                    <top>0</top>
+                    <width>765</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <label>[COLOR white2]$INFO[ListItem.Property(Artist)]: [/COLOR]$INFO[ListItem.Label]</label>
+                    <font>Font_Reg29</font>
+                    <textcolor>grey2</textcolor>
+                </control>
+            </itemlayout>
+            <focusedlayout height="30" width="800">
+                <control type="image">
+                    <width>550</width>
+                    <height>30</height>
+                    <texture border="8">script.culrc.lyrics/default-list-focus.png</texture>
+                    <visible>Control.HasFocus(8010)</visible>
+                    <colordiffuse>$VAR[FocusTextureColorVar]</colordiffuse>
+                </control>
+                <control type="image">
+                    <left>15</left>
+                    <top>0</top>
+                    <width>370</width>
+                    <height>30</height>
+                    <texture border="3">osd_settings_buttonnf.png</texture>
+                </control>
+                <control type="label">
+                    <left>35</left>
+                    <top>0</top>
+                    <width>60</width>
+                    <height>30</height>
+                    <align>right</align>
+                    <label>$INFO[ListItem.Property(Number)]</label>
+                    <font>Font_Reg29</font>
+                    <textcolor>$VAR[TitleColorVar]</textcolor>
+                </control>
+                <control type="label">
+                    <left>45</left>
+                    <top>0</top>
+                    <width>765</width>
+                    <height>30</height>
+                    <align>left</align>
+                    <label>[COLOR white2]$INFO[ListItem.Property(Artist)]: [/COLOR]$INFO[ListItem.Label]</label>
+                    <font>Font_Reg29</font>
+                    <textcolor>grey2</textcolor>
+                </control>
+            </focusedlayout>
+            <content>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(1).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(1).Artist]</property>
+                    <property name="Number">1:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(1).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(1)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(1).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(2).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(2).Artist]</property>
+                    <property name="Number">2:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(2).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(2)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(2).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(3).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(3).Artist]</property>
+                    <property name="Number">3:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(3).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(3)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(3).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(4).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(4).Artist]</property>
+                    <property name="Number">4:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(4).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(4)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(4).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(5).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(5).Artist]</property>
+                    <property name="Number">5:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(5).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(5)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(5).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(6).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(6).Artist]</property>
+                    <property name="Number">6:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(6).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(6)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(6).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(7).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(7).Artist]</property>
+                    <property name="Number">7:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(7).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(7)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(7).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(8).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(8).Artist]</property>
+                    <property name="Number">8:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(8).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(8)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(8).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(9).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(9).Artist]</property>
+                    <property name="Number">9:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(9).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(9)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(9).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(10).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(10).Artist]</property>
+                    <property name="Number">10:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(10).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(10)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(10).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(11).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(10).Artist]</property>
+                    <property name="Number">11:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(11).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(11)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(11).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(12).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(12).Artist]</property>
+                    <property name="Number">12:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(12).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(12)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(12).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(13).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(13).Artist]</property>
+                    <property name="Number">13:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(13).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(13)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(13).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(14).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(14).Artist]</property>
+                    <property name="Number">14:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(14).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(14)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(14).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(15).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(15).Artist]</property>
+                    <property name="Number">15:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(15).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(15)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(15).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(16).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(16).Artist]</property>
+                    <property name="Number">16:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(16).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(16)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(16).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(17).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(17).Artist]</property>
+                    <property name="Number">17:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(17).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(17)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(17).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(18).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(18).Artist]</property>
+                    <property name="Number">18:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(18).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(18)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(18).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(19).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(19).Artist]</property>
+                    <property name="Number">19:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(19).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(19)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(19).Title)</visible>
+                </item>
+                <item>
+                    <label>$INFO[MusicPlayer.Offset(20).Title]</label>
+                    <property name="Artist">$INFO[MusicPlayer.Offset(20).Artist]</property>
+                    <property name="Number">20:</property>
+                    <thumb>$INFO[MusicPlayer.Offset(20).Cover]</thumb>
+                    <onclick>Playlist.PlayOffset(20)</onclick>
+                    <visible>!IsEmpty(MusicPlayer.Offset(20).Title)</visible>
+                </item>
+            </content>
+        </control>
+        <control type="group" id="7776">
+            <description>Settings 1</description>
+            <top>80</top>
+            <left>200</left>
+            <width>450</width>
+            <height>450</height>
+            <visible>true</visible>
+            <control type="grouplist" id="7777">
+                <description>Lyric Scroller</description>
+                <top>690</top>
+                <left>610</left>
+                <width>250</width>
+                <height>100</height>
+                <align>center</align>
+                <itemgap>5</itemgap>
+                <scrolltime tween="sine" easing="out">200</scrolltime>
+                <orientation>horizontal</orientation>
+                <usecontrolcoords>false</usecontrolcoords>
+                <visible>Skin.HasSetting(LyricScroll)</visible>
+                <animation type="Visible" reversible="true">
+                    <effect type="fade" start="0" end="100" time="600"/>
+                </animation>
+                <animation type="Hidden" reversible="true">
+                    <effect type="fade" start="100" end="0" time="600"/>
+                </animation>
+                <onup>8887</onup>
+                <ondown>8888</ondown>
+                <onleft>8851</onleft>
+                <onright>8851</onright>
+                <control type="togglebutton" id="8850">
+                    <description>Lyric Scroll</description>
+                    <width>40</width>
+                    <height>40</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <onup>8851</onup>
+                    <ondown>8851</ondown>
+                    <onleft>8851</onleft>
+                    <onright>8851</onright>
+                    <texturefocus>script.culrc.lyrics/RedArrowUpSelected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/RedArrowUp.png</texturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <usealttexture>-</usealttexture>
+                    <alttexturefocus>-</alttexturefocus>
+                    <alttexturenofocus>-</alttexturenofocus>
+                    <onfocus>Control.Message(111,pageup)</onfocus>
+                    <onfocus>SetFocus(8851)</onfocus>
+                </control>
+                <control type="togglebutton" id="8851">
+                    <description>Lyric Scroll</description>
+                    <width>40</width>
+                    <height>40</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <onup>8887</onup>
+                    <ondown>8888</ondown>
+                    <onleft>8850</onleft>
+                    <onright>8852</onright>
+                    <texturefocus>script.culrc.lyrics/PauseRedSelected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/PauseRed.png</texturenofocus>
+                    <usealttexture>Skin.HasSetting(LyricPause)</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/PauseRedSelectedPaused.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/PauseRedSelectedPaused.png</alttexturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <usealttexture>-</usealttexture>
+                    <alttexturefocus>-</alttexturefocus>
+                    <alttexturenofocus>-</alttexturenofocus>
+                    <onclick>Skin.ToggleSetting(LyricPause)</onclick>
+                </control>
+                <control type="togglebutton" id="8852">
+                    <description>Lyric Scroll</description>
+                    <width>40</width>
+                    <height>40</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <onup>8851</onup>
+                    <ondown>8851</ondown>
+                    <onleft>8851</onleft>
+                    <onright>8851</onright>
+                    <texturefocus>script.culrc.lyrics/RedArrowDownSelected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/RedArrowDown.png</texturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <usealttexture>-</usealttexture>
+                    <alttexturefocus/>
+                    <alttexturenofocus/>
+                    <onfocus>Control.Message(111,pagedown)</onfocus>
+                    <onfocus>SetFocus(8851)</onfocus>
+                </control>
+            </control>
+            <control type="image">
+                <description>separator</description>
+                <left>660</left>
+                <top>795</top>
+                <width>150</width>
+                <height>1</height>
+                <align>center</align>
+                <texture>script.culrc.lyrics/default-separatorOSD.png</texture>
+                <colordiffuse>DDFFFFFF</colordiffuse>
+                <usecontrolcoords>true</usecontrolcoords>
+                <visible>Skin.HasSetting(LyricScroll)</visible>
+                <animation type="Visible" reversible="true">
+                    <effect type="fade" start="0" end="100" time="600"/>
+                </animation>
+                <animation type="Hidden" reversible="true">
+                    <effect type="fade" start="100" end="0" time="600"/>
+                </animation>
+            </control>
+            <control type="togglebutton" id="8887">
+                <description>Lyric Scroll</description>
+                <left>1125</left>
+                <top>675</top>
+                <width>40</width>
+                <height>20</height>
+                <align>center</align>
+                <visible>true</visible>
+                <onup>999</onup>
+                <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                <ondown condition="Control.IsVisible(110)">110</ondown>
+                <onleft>8891</onleft>
+                <onright>111</onright>
+                <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                <usealttexture>Skin.HasSetting(LyricScroll)</usealttexture>
+                <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                <pulseonselect>true</pulseonselect>
+                <onclick>Skin.ToggleSetting(LyricScroll)</onclick>
+                <onclick>SetFocus(8851)</onclick>
+                <selected>Skin.HasSetting(LyricScroll)</selected>
+            </control>
+            <control type="grouplist" id="8888">
+                <description>Toggle Buttons 1</description>
+                <top>750</top>
+                <left>655</left>
+                <width>250</width>
+                <height>100</height>
+                <align>left</align>
+                <itemgap>20</itemgap>
+                <scrolltime tween="sine" easing="out">200</scrolltime>
+                <orientation>horizontal</orientation>
+                <usecontrolcoords>false</usecontrolcoords>
+                <visible>Skin.HasSetting(LyricScroll)</visible>
+                <onup>8851</onup>
+                <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                <ondown condition="Control.IsVisible(110)">110</ondown>
+                <onleft>8891</onleft>
+                <onright>8887</onright>
+                <animation type="Visible" reversible="true">
+                    <effect type="fade" start="0" end="100" time="600"/>
+                </animation>
+                <animation type="Hidden" reversible="true">
+                    <effect type="fade" start="100" end="0" time="600"/>
+                </animation>
+                <control type="togglebutton" id="8889">
+                    <description>Lyric Scroll1</description>
+                    <width>40</width>
+                    <height>20</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                    <usealttexture>Skin.HasSetting(LyricScroll1)</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <onclick>Skin.Reset(LyricScroll2)</onclick>
+                    <onclick>Skin.Reset(LyricScroll3)</onclick>
+                    <onclick>Skin.SetBool(LyricScroll1)</onclick>
+                    <onclick>SetFocus(8851)</onclick>
+                    <selected>Skin.HasSetting(LyricScroll1)</selected>
+                </control>
+                <control type="togglebutton" id="8890">
+                    <description>Lyric Scroll2</description>
+                    <width>40</width>
+                    <height>20</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                    <usealttexture>Skin.HasSetting(LyricScroll2)</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <onclick>Skin.Reset(LyricScroll1)</onclick>
+                    <onclick>Skin.Reset(LyricScroll3)</onclick>
+                    <onclick>Skin.SetBool(LyricScroll2)</onclick>
+                    <onclick>SetFocus(8851)</onclick>
+                    <selected>Skin.HasSetting(LyricScroll2)</selected>
+                </control>
+                <control type="togglebutton" id="8891">
+                    <description>Lyric Scroll3</description>
+                    <width>40</width>
+                    <height>20</height>
+                    <align>center</align>
+                    <visible>true</visible>
+                    <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                    <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                    <usealttexture>Skin.HasSetting(LyricScroll3)</usealttexture>
+                    <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                    <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                    <pulseonselect>true</pulseonselect>
+                    <onclick>Skin.Reset(LyricScroll1)</onclick>
+                    <onclick>Skin.Reset(LyricScroll2)</onclick>
+                    <onclick>Skin.SetBool(LyricScroll3)</onclick>
+                    <onclick>SetFocus(8851)</onclick>
+                    <selected>Skin.HasSetting(LyricScroll3)</selected>
+                </control>
+            </control>
+        </control>
+        <control type="textbox" id="3454">
+            <left>944</left>
+            <top>445</top>
+            <width>812</width>
+            <height>267</height>
+            <font>Font_Reg26_Caps</font>
+            <textcolor>white3</textcolor>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+            <align>left</align>
+            <pulseonselect/>
+            <pagecontrol>111</pagecontrol>
+            <visible>Skin.HasSetting(LyricScroll1) + Skin.HasSetting(LyricScroll)</visible>
+            <!--<visible>Skin.HasSetting(LyricScroll1) + !Skin.HasSetting(LyricScroll2) + !Skin.HasSetting(LyricScroll3) + Skin.HasSetting(LyricScroll)</visible>-->
+            <autoscroll delay="1000" time="3000">Skin.HasSetting(LyricScroll1) +  !Skin.HasSetting(LyricPause)</autoscroll>
+            <label>[CR][CR][CR][CR][CR][CR]$INFO[Window(Home).Property(culrc.lyrics)]</label>
+            <animation type="Visible" reversible="false">
+                <effect type="fade" start="0" end="100" time="1000"/>
+            </animation>
+            <animation type="Hidden" reversible="false">
+                <effect type="fade" start="100" end="0" time="600"/>
+            </animation>
+        </control>
+        <control type="textbox" id="3455">
+            <left>944</left>
+            <top>445</top>
+            <width>812</width>
+            <height>267</height>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+            <font>Font_Reg26_Caps</font>
+            <textcolor>white3</textcolor>
+            <pulseonselect/>
+            <pagecontrol>111</pagecontrol>
+            <visible>Skin.HasSetting(LyricScroll2) + Skin.HasSetting(LyricScroll)</visible>
+            <!--<visible>Skin.HasSetting(LyricScroll2) + !Skin.HasSetting(LyricScroll3) + !Skin.HasSetting(LyricScroll1) + Skin.HasSetting(LyricScroll)</visible>-->
+            <autoscroll delay="1000" time="2000">Skin.HasSetting(LyricScroll2) +  !Skin.HasSetting(LyricPause)</autoscroll>
+            <label>[CR][CR][CR][CR][CR][CR]$INFO[Window(Home).Property(culrc.lyrics)]</label>
+            <animation type="Visible" reversible="false">
+                <effect type="fade" start="0" end="100" time="1000"/>
+            </animation>
+            <animation type="Hidden" reversible="false">
+                <effect type="fade" start="100" end="0" time="600"/>
+            </animation>
+        </control>
+        <control type="textbox" id="3456">
+            <left>944</left>
+            <top>445</top>
+            <width>812</width>
+            <height>267</height>
+            <font>Font_Reg26_Caps</font>
+            <textcolor>white3</textcolor>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+            <align>left</align>
+            <pulseonselect/>
+            <pagecontrol>111</pagecontrol>
+            <visible>Skin.HasSetting(LyricScroll3) + Skin.HasSetting(LyricScroll)</visible>
+            <!--<visible>Skin.HasSetting(LyricScroll3) + !Skin.HasSetting(LyricScroll1) + !Skin.HasSetting(LyricScroll2) + Skin.HasSetting(LyricScroll)</visible>-->
+            <autoscroll delay="1000" time="1000">Skin.HasSetting(LyricScroll3) +  !Skin.HasSetting(LyricPause)</autoscroll>
+            <label>[CR][CR][CR][CR][CR][CR]$INFO[Window(Home).Property(culrc.lyrics)]</label>
+            <animation type="Visible" reversible="false">
+                <effect type="fade" start="0" end="100" time="1000"/>
+            </animation>
+            <animation type="Hidden" reversible="false">
+                <effect type="fade" start="100" end="0" time="600"/>
+            </animation>
+        </control>
+        <control type="togglebutton" id="4000">
+            <top>20</top>
+            <left>1875</left>
+            <width>25</width>
+            <height>25</height>
+            <visible>true</visible>
+            <texturefocus>script.culrc.lyrics/switch_settings_focused.png</texturefocus>
+            <texturenofocus>script.culrc.lyrics/switch_settings.png</texturenofocus>
+            <alttexturefocus>script.culrc.lyrics/switch_settings_focused.png</alttexturefocus>
+            <alttexturenofocus>script.culrc.lyrics/switch_settings.png</alttexturenofocus>
+            <aspectratio>keep</aspectratio>
+            <usecontrolcoords>true</usecontrolcoords>
+            <visible>true</visible>
+            <onclick>-</onclick>
+            <onup condition="Control.IsVisible(8851)">8851</onup>
+            <onup condition="Control.IsVisible(110)">110</onup>
+            <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+            <ondown condition="Control.IsVisible(110)">110</ondown>
+            <onleft>1004</onleft>
+            <onright>811</onright>
+        </control>
+        <control type="group" id="3000">
+            <description>Animation Settings</description>
+            <top>0</top>
+            <left>675</left>
+            <width>1875</width>
+            <height>75</height>
+            <animation type="Visible" reversible="true">
+                <effect type="slide" start="0,-60" delay="520" tween="cubic" time="560"/>
+            </animation>
+            <animation type="Hidden" reversible="true">
+                <effect type="slide" end="0,-60" delay="3000" time="560"/>
+            </animation>
+            <visible>ControlGroup(3000).HasFocus | Control.HasFocus(4000)</visible>
+            <control type="label">
+                <label>[B]BACKGROUND[/B]</label>
+                <top>3</top>
+                <left>426</left>
+                <font>Font_Reg17</font>
+                <width>150</width>
+                <usecontrolcoords>true</usecontrolcoords>
+                <visible>true</visible>
+                <height>25</height>
+                <align>center</align>
+                <textcolor>88FFFFFF</textcolor>
+            </control>
+            <control type="label">
+                <label>[B]OVERLAY[/B]</label>
+                <top>3</top>
+                <left>875</left>
+                <font>Font_Reg17</font>
+                <width>150</width>
+                <height>25</height>
+                <align>center</align>
+                <textcolor>88FFFFFF</textcolor>
+                <usecontrolcoords>true</usecontrolcoords>
+                <visible>true</visible>
+            </control>
+            <control type="group" id="1000">
+                <description>Overlay Settings</description>
+                <top>0</top>
+                <left>750</left>
+                <width>450</width>
+                <height>75</height>
+                <visible>true</visible>
+                <control type="grouplist" id="1001">
+                    <description>Overlay SettingsToggle Buttons</description>
+                    <top>30</top>
+                    <left>75</left>
+                    <width>450</width>
+                    <height>50</height>
+                    <align>left</align>
+                    <itemgap>50</itemgap>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <visible>true</visible>
+                    <onup condition="Control.IsVisible(8851)">8851</onup>
+                    <onup condition="Control.IsVisible(110)">110</onup>
+                    <ondown condition="Control.IsVisible(8851)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onleft>2004</onleft>
+                    <onright>811</onright>
+                    <control type="togglebutton" id="1002">
+                        <description>Red</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <visible>true</visible>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.HasSetting(LyricScroll)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.Reset(bgtheme2)</onclick>
+                        <onclick>Skin.Reset(bgtheme3)</onclick>
+                        <onclick>Skin.ToggleSetting(bgtheme1)</onclick>
+                        <selected>Skin.HasSetting(bgtheme1)</selected>
+                    </control>
+                    <control type="togglebutton" id="1003">
+                        <description>Blue</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.HasSetting(animation_bg)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.Reset(bgtheme1)</onclick>
+                        <onclick>Skin.Reset(bgtheme3)</onclick>
+                        <onclick>Skin.ToggleSetting(bgtheme2)</onclick>
+                        <selected>Skin.HasSetting(bgtheme2)</selected>
+                    </control>
+                    <control type="togglebutton" id="1004">
+                        <description>Green</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.HasSetting(FadeVizBG)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.Reset(bgtheme1)</onclick>
+                        <onclick>Skin.Reset(bgtheme2)</onclick>
+                        <onclick>Skin.ToggleSetting(bgtheme3)</onclick>
+                        <selected>Skin.HasSetting(bgtheme3)</selected>
+                    </control>
+                </control>
+                <control type="group" id="1005">
+                    <description>Overlay Settings Labels</description>
+                    <top>60</top>
+                    <left>0</left>
+                    <width>600</width>
+                    <height>25</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <itemgap/>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <visible>true</visible>
+                    <control type="label">
+                        <label>Red</label>
+                        <top>0</top>
+                        <left>25</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>Blue</label>
+                        <top>0</top>
+                        <left>125</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height> 25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>Green</label>
+                        <top>0</top>
+                        <left>225</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                </control>
+            </control>
+            <control type="group" id="2000">
+                <description>Background Settings</description>
+                <top>0</top>
+                <left>200</left>
+                <width>450</width>
+                <height>75</height>
+                <visible>true</visible>
+                <control type="grouplist" id="2001">
+                    <description>Toggle Buttons 3</description>
+                    <top>30</top>
+                    <left>75</left>
+                    <width>450</width>
+                    <height>50</height>
+                    <align>left</align>
+                    <itemgap>50</itemgap>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <visible>true</visible>
+                    <onup condition="Control.IsVisible(8851)">8851</onup>
+                    <onup condition="Control.IsVisible(110)">110</onup>
+                    <ondown condition="Skin.HasSetting(LyricScroll)">8851</ondown>
+                    <ondown condition="Control.IsVisible(110)">110</ondown>
+                    <onleft>813</onleft>
+                    <onright>1002</onright>
+                    <control type="togglebutton" id="813">
+                        <description>FadeVizBG</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.HasSetting(FadeVizBG)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.ToggleSetting(FadeVizBG)</onclick>
+                        <selected>Skin.HasSetting(FadeVizBG)</selected>
+                    </control>
+                    <control type="togglebutton" id="812">
+                        <description>Animate Background</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.HasSetting(animation_bg)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.ToggleSetting(animation_bg)</onclick>
+                        <selected>Skin.HasSetting(animation_bg)</selected>
+                    </control>
+                    <control type="togglebutton" id="2002">
+                        <description>Random Artist Slideshow</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <visible>true</visible>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.String(MusicViz.MultiFanart,randomartists)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,$ESCINFO[Skin.String(MusicViz.MultiFanart)])</onclick>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,randomartists)</onclick>
+                        <onclick>Skin.SetString(MusicViz.MultiFanart,$ESCINFO[Skin.String(ItemToEdit.MultiFanart)])</onclick>
+                        <onclick>Skin.Reset(ItemToEdit.MultiFanart)</onclick>
+                    </control>
+                    <control type="togglebutton" id="2003">
+                        <description>Artist Slideshow</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.String(MusicViz.MultiFanart,artistslideshow)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,$ESCINFO[Skin.String(MusicViz.MultiFanart)])</onclick>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,artistslideshow)</onclick>
+                        <onclick>Skin.SetString(MusicViz.MultiFanart,$ESCINFO[Skin.String(ItemToEdit.MultiFanart)])</onclick>
+                        <onclick>Skin.Reset(ItemToEdit.MultiFanart)</onclick>
+                    </control>
+                    <control type="togglebutton" id="2004">
+                        <description>CD-Wall</description>
+                        <width>50</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <texturefocus>script.culrc.lyrics/switch_off_selected.png</texturefocus>
+                        <texturenofocus>script.culrc.lyrics/switch_off.png</texturenofocus>
+                        <usealttexture>Skin.String(MusicViz.MultiFanart,cd-wall)</usealttexture>
+                        <alttexturefocus>script.culrc.lyrics/switch_on_selected_alt.png</alttexturefocus>
+                        <alttexturenofocus>script.culrc.lyrics/switch_on_selected.png</alttexturenofocus>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,$INFO[Skin.String(MusicViz.MultiFanart)])</onclick>
+                        <onclick>Skin.SetString(ItemToEdit.MultiFanart,cd-wall)</onclick>
+                        <onclick>Skin.SetString(MusicViz.MultiFanart,$INFO[Skin.String(ItemToEdit.MultiFanart)])</onclick>
+                        <onclick>Skin.Reset(ItemToEdit.MultiFanart)</onclick>
+                    </control>
+                </control>
+                <control type="group" id="2005">
+                    <description>Background Settings Labels</description>
+                    <top>60</top>
+                    <left>0</left>
+                    <width>600</width>
+                    <height>25</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <itemgap/>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <orientation>horizontal</orientation>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <visible>true</visible>
+                    <control type="label">
+                        <label>Fade</label>
+                        <top>0</top>
+                        <left>25</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>Animate</label>
+                        <top>0</top>
+                        <left>125</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height> 25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>Random</label>
+                        <top>0</top>
+                        <left>225</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>Artist</label>
+                        <top>0</top>
+                        <left>325</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height> 25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                    <control type="label">
+                        <label>CD-Wall</label>
+                        <top>0</top>
+                        <left>425</left>
+                        <font>Font_Reg17</font>
+                        <width>150</width>
+                        <height>25</height>
+                        <align>center</align>
+                        <textcolor>88FFFFFF</textcolor>
+                        <visible>true</visible>
+                    </control>
+                </control>
+            </control>
+        </control>
+    </controls>
+</window>

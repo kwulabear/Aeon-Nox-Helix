@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--========================================================================-->
+<!--   ###    ########  #######  ##    ##    ##    ##  #######  ##     ##	-->
+<!--  ## ##   ##       ##     ## ###   ##    ###   ## ##     ##  ##   ##	-->
+<!--##    ##  ##       ##     ## ####  ##    ####  ## ##     ##   ## ##		-->
+<!--##     ## ######   ##     ## ## ## ##    ## ## ## ##     ##    ###		-->
+<!--######### ##       ##     ## ##  ####    ##  #### ##     ##   ## ##		-->
+<!--##     ## ##       ##     ## ##   ###    ##   ### ##     ##  ##   ##	-->
+<!--##     ## ########  #######  ##    ##    ##    ##  #######  ##     ##	-->
+<!--========================================================================-->
+<window>
+	<defaultcontrol>5</defaultcontrol>
+	<coordinates>
+		<system>1</system>
+		<left>360</left>
+		<top>179</top>
+	</coordinates>
+	<include>dialogeffect</include>
+	<controls>
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="400" condition="Window.IsVisible(SliderDialog) | Window.IsVisible(FileBrowser)">Conditional</animation>
+            <control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>1200</width>
+				<height>722</height>
+                <texture>osd/osd_settings_back_glow.png</texture>
+                <colordiffuse>$VAR[ColorDiffuseVar]</colordiffuse>
+                <visible>!Skin.HasSetting(DisableGlowbar)</visible>
+                <include>PanelGlowFade</include>
+            </control>			
+			<control type="image">
+				<description>background image</description>
+				<left>0</left>
+				<top>0</top>
+				<width>1200</width>
+				<height>722</height>
+				<texture border="40">osd/osd_settings_back.png</texture>
+			</control>
+			<control type="label">
+				<left>30</left>
+				<top>32</top>
+				<width>1140</width>
+				<height>40</height>
+				<font>font15_title</font>
+				<label>$LOCALIZE[3] - $LOCALIZE[5]</label>
+				<align>center</align>
+				<textcolor>dialogheader</textcolor>
+				<font>font15_title</font>
+				<visible>Window.IsVisible(123)</visible>
+			</control>
+			<control type="label">
+				<left>30</left>
+				<top>32</top>
+				<width>1140</width>
+				<height>40</height>
+				<font>font15_title</font>
+				<label>$LOCALIZE[292] - $LOCALIZE[5]</label>
+				<align>center</align>
+				<textcolor>dialogheader</textcolor>
+				<font>font15_title</font>
+				<visible>Window.IsVisible(124)</visible>
+			</control>
+			<control type="image">
+				<left>32</left>
+				<top>88</top>
+				<width>1136</width>
+				<height>600</height>
+				<texture border="5">dialogs/default/inner2.png</texture>
+			</control>
+			<control type="grouplist" id="5">
+				<description>control area</description>
+				<left>32</left>
+				<top>88</top>
+				<width>1136</width>
+				<height>600</height>
+				<itemgap>0</itemgap>
+				<pagecontrol>60</pagecontrol>
+				<onup>5</onup>
+				<ondown>5</ondown>
+				<onleft>5</onleft>
+				<onright>60</onright>
+			</control>
+			<control type="scrollbar" id="60">
+				<left>1166</left>
+				<top>88</top>
+				<width>14</width>
+				<height>600</height>
+				<onleft>5</onleft>
+				<onright>5</onright>
+				<ondown>61</ondown>
+				<onup>61</onup>
+			</control>
+		</control>
+		<control type="button" id="7">
+			<description>Default Button</description>
+			<left>0</left>
+			<top>0</top>
+			<height>75</height>
+			<font>font15</font>
+			<textcolor>grey2</textcolor>
+			<colordiffuse>FFFFFFFF</colordiffuse>
+            <texturefocus>views/tripanel/listselect_fo.png</texturefocus>
+            <texturenofocus>osd/osd_settings_buttonnf.png</texturenofocus>
+		</control>
+		<control type="radiobutton" id="8">
+			<description>Default RadioButton</description>
+			<left>0</left>
+			<top>0</top>
+			<height>75</height>
+			<font>font15</font>
+			<textcolor>grey2</textcolor>
+			<colordiffuse>$VAR[FocusTextureColorVar]</colordiffuse>
+            <texturefocus>views/tripanel/listselect_fo.png</texturefocus>
+            <texturenofocus>osd/osd_settings_buttonnf.png</texturenofocus>
+		</control>
+		<control type="spincontrolex" id="9">
+			<description>Default SpinControlex</description>
+			<left>0</left>
+			<top>0</top>
+			<height>75</height>
+			<font>font15</font>
+			<textcolor>grey2</textcolor>
+			<colordiffuse>$VAR[FocusTextureColorVar]</colordiffuse>
+            <texturefocus>views/tripanel/listselect_fo.png</texturefocus>
+            <texturenofocus>osd/osd_settings_buttonnf.png</texturenofocus>
+			<aligny>center</aligny>
+			<reverse>yes</reverse>
+		</control>
+		<control type="sliderex" id="13">
+			<description>Default Slider</description>
+			<left>0</left>
+			<top>0</top>
+			<height>75</height>
+			<font>font15</font>
+			<textcolor>grey2</textcolor>
+			<colordiffuse>$VAR[FocusTextureColorVar]</colordiffuse>
+            <texturefocus>views/tripanel/listselect_fo.png</texturefocus>
+            <texturenofocus>osd/osd_settings_buttonnf.png</texturenofocus>
+			<aligny>center</aligny>
+		</control>
+	</controls>
+</window>
