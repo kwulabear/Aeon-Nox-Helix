@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <addon
-  id="skin.aeon.nox"
+  id="skin.aeon.nox.helix"
   version="4.1.9.9a"
-  name="Aeon Nox Gotham Plus"
+  name="Aeon Nox Helix"
   provider-name="Big_Noid|phil65">
   <requires>
     <import addon="xbmc.gui" version="5.0.0"/>
